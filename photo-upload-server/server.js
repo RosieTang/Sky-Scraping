@@ -7,7 +7,7 @@ const port = 5173;
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './uploads/');
+    cb(null, './Users/tangyunxi/Library/CloudStorage/OneDrive-Personal/文档/WUSTL/activities/HackWashu23/skyscraping/photo-upload-server/uploads');
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname)); // Appending extension

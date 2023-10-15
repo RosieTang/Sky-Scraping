@@ -9,9 +9,10 @@ function App() {
   const handlePhotoUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setUploadedPhoto(URL.createObjectURL(file));
+      setUploadedPhoto(file);
     }
   };
+  
 
   useEffect(() => {
     // Simulate a loading delay (e.g., waiting for data to load)
@@ -23,27 +24,33 @@ function App() {
   }, []);
 
   const handleSubmit = async () => {
-    if (!uploadedPhoto) return;
+    // if (!uploadedPhoto) return;
 
-    const formData = new FormData();
-    formData.append('photo', uploadedPhoto);
+    // const formData = new FormData();
+    // formData.append('photo', uploadedPhoto);
 
-    try {
-        const response = await fetch('http://localhost:5173/upload', {
-            method: 'POST',
-            body: formData
-        });
+    // try {
+    //     const response = await fetch('http://localhost:5173/upload', {
+    //         method: 'POST',
+    //         body: formData
+    //     });
 
-        if (response.ok) {
-            console.log('Photo uploaded successfully');
-            // Handle the server's response if necessary
-        } else {
-            console.error('Error uploading photo');
-        }
-    } catch (error) {
-        console.error('There was an error uploading the photo', error);
-    }
+    //     if (response.ok) {
+    //         const data = await response.json();
+            
+    //         // If using base64 encoding:
+    //         setReturnedPhoto("data:image/jpeg;base64," + data.image);
+            
+    //         console.log('Photo uploaded and processed successfully');
+    //     } else {
+    //         console.error('Error uploading photo');
+    //     }
+    // } catch (error) {
+    //     console.error('There was an error uploading the photo', error);
+    // }
   };
+
+
   
   useEffect(() => {
     document.title = "Sky Scraping";
@@ -64,11 +71,11 @@ function App() {
       <div className="nav">
         Sky Scraping
       </div>
-      <div classname="PHOTO">
-        <h1 className="centered-header">Become a constallation!</h1>
+      <div className="photo">
+        <h1 className="centered-header">Become a constellation!</h1>
         <div className="upload-section">
           {uploadedPhoto ? (
-            <img src={uploadedPhoto} alt="Uploaded preview" className="uploaded-preview" />
+            <img src={URL.createObjectURL(uploadedPhoto)} alt="Uploaded preview" className="uploaded-preview" />
             ) : (
               <label className="upload-label">
               Drop your photo here or click to select one
@@ -85,10 +92,10 @@ function App() {
         )}
       </div>
       
-      <div classname="THE PROJECT">
+      <div className="THE PROJECT">
         <h1>About Our Project</h1>
       </div>
-      <div classname="ABOUT US">
+      <div className="ABOUT US">
         <h1>About us</h1>
       </div>
       

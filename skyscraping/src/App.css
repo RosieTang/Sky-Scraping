@@ -4,12 +4,17 @@ h1 {
 }
 
 body {
-  background-color: #404040;
+  /*background-color: #404040;*/
+  
   padding-left: 50px;
+  background-image: url('/Users/tangyunxi/Library/CloudStorage/OneDrive-Personal/文档/WUSTL/activities/HackWashu23/skyscraping/skyscraping/public/nightsky.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 body, h1, h2, p, label {
-  color: #f5f5f5; /* This is a light gray, adjust as necessary */
+  color: #f5f5f5; 
 }
 
 .loading-overlay {
@@ -31,7 +36,7 @@ body, h1, h2, p, label {
   bottom: 0;
   width: 50%;
   background-color: orange;
-  animation: curtainEffect 2s forwards;
+  animation: curtainEffect 3s forwards;
 }
 
 .curtain.left {
@@ -45,8 +50,8 @@ body, h1, h2, p, label {
 }
 
 .ball {
-  width: 50px;
-  height: 50px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   position: absolute;
   top: 50%;
@@ -56,18 +61,18 @@ body, h1, h2, p, label {
 .ball.red {
   background-color: red;
   left: 45%;
-  animation: moveLeft 2s forwards;
+  animation: moveLeft 3s forwards;
 }
 
 .ball.yellow {
   background-color: yellow;
   right: 45%;
-  animation: moveRight 2s forwards;
+  animation: moveRight 3s forwards;
 }
 
 @keyframes moveLeft {
   0% {
-    left: 50%;
+    left: 40%;
   }
   100% {
     left: -10%;
@@ -76,7 +81,7 @@ body, h1, h2, p, label {
 
 @keyframes moveRight {
   0% {
-    right: 50%;
+    right: 40%;
   }
   100% {
     right: -10%;
@@ -126,7 +131,7 @@ body, h1, h2, p, label {
 .centered-header {
   text-align: center;
   font-family: 'Playfair Display', serif; /* This is the font we imported */
-  font-size: 2.5rem; 
+  font-size: 3.8rem; 
   color: #ffffff; /* Adjust the color as needed */
   padding-top: 100px; /* Add some distance from the navigation bar */
 }
@@ -135,8 +140,8 @@ body, h1, h2, p, label {
 .upload-section {
   border: 2px dashed #aaa;
   padding: 20px;
-  width: 300px;
-  height: 200px;
+  width: 480px;
+  height: 320px;
   display: flex;
   align-items: center;
   flex-direction: column;  /* Stack child elements vertically */
@@ -155,6 +160,17 @@ body, h1, h2, p, label {
 .uploaded-preview, .returned-preview {
   max-width: 100%;
   height: auto;
+}
+
+.photo {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; Centers content vertically */
+  align-items: center;     /* Centers content horizontally */
+  /* min-height: calc(100vh - 60px); Takes full viewport height minus the nav bar height */
+  width: 100%;             /* Takes full viewport width */
+  text-align: center;
+  padding-left: 250px;
 }
 
 .returned-section {
