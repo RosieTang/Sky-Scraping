@@ -1,42 +1,191 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+h1 {
+  margin-top: 70px;  /* This pushes the h1 down to account for the nav bar */
+  color: #800080;
+}
+
+body {
+  background-color: #404040;
+  padding-left: 50px;
+}
+
+body, h1, h2, p, label {
+  color: #f5f5f5; /* This is a light gray, adjust as necessary */
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  overflow: hidden;
+}
+
+.curtain {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background-color: orange;
+  animation: curtainEffect 2s forwards;
+}
+
+.curtain.left {
+  left: 0;
+  animation-name: curtainLeftEffect;
+}
+
+.curtain.right {
+  right: 0;
+  animation-name: curtainRightEffect;
+}
+
+.ball {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ball.red {
+  background-color: red;
+  left: 45%;
+  animation: moveLeft 2s forwards;
+}
+
+.ball.yellow {
+  background-color: yellow;
+  right: 45%;
+  animation: moveRight 2s forwards;
+}
+
+@keyframes moveLeft {
+  0% {
+    left: 50%;
+  }
+  100% {
+    left: -10%;
+  }
+}
+
+@keyframes moveRight {
+  0% {
+    right: 50%;
+  }
+  100% {
+    right: -10%;
+  }
+}
+
+@keyframes curtainLeftEffect {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -50%;
+  }
+}
+
+@keyframes curtainRightEffect {
+  0% {
+    right: 0;
+  }
+  100% {
+    right: -50%;
+  }
+}
+
+.nav {
+  position: fixed; /* This ensures the bar is fixed at the top of the page */
+  top: 0; /* Position it right at the top */
+  left: 0; /* Align it to the left */
+  width: 100%; /* Take the full width of the viewport */
+  height: 60px; /* Height of the bar */
+  background-color: #034694; /* Dark background */
+  color: #fff; /* White text */
+  display: flex; /* Flexbox for centering contents */
+  align-items: center; /* Vertically center the content */
+  justify-content: flex-start; /* Aligns content to the left */
+  padding-left: 20px;  /* Adds some padding to the left for spacing */
+  font-size: 24px;  /* Bigger font size */
+  font-weight: bold;  /* Bolder font weight */
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); 
+  z-index: 1000; 
+}
+
+/* Import a Google Font (just an example, you can choose any font you like) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+/* Style for the header centered horizontally */
+.centered-header {
   text-align: center;
+  font-family: 'Playfair Display', serif; /* This is the font we imported */
+  font-size: 2.5rem; 
+  color: #ffffff; /* Adjust the color as needed */
+  padding-top: 100px; /* Add some distance from the navigation bar */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+.upload-section {
+  border: 2px dashed #aaa;
+  padding: 20px;
+  width: 300px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;  /* Stack child elements vertically */
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.upload-label {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.uploaded-preview, .returned-preview {
+  max-width: 100%;
+  height: auto;
 }
 
-.card {
-  padding: 2em;
+.returned-section {
+  margin-top: 30px;
 }
 
-.read-the-docs {
-  color: #888;
+input[type="file"], button {
+  background-color: #003366; /* Using the dark blue from the nav bar for consistency */
+  color: #f5f5f5; /* Light gray text for contrast */
+  border: none;
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  cursor: pointer; 
 }
+
+input[type="file"]:hover, button:hover {
+  background-color: #004080; /* Slightly different shade for hover effect */
+}
+
+button {
+  background-color: #034694; 
+  color: #404040; 
+  border: none;
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+button:hover {
+  background-color: #0258a4;  /* Slightly lighter blue for hover effect */
+  color: #f5f5f5
+}
+

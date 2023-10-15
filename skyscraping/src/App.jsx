@@ -1,35 +1,99 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [uploadedPhoto, setUploadedPhoto] = useState(null);
+  const [returnedPhoto, setReturnedPhoto] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handlePhotoUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setUploadedPhoto(URL.createObjectURL(file));
+    }
+  };
+
+  useEffect(() => {
+    // Simulate a loading delay (e.g., waiting for data to load)
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // After 2 seconds, the loading screen will disappear. Adjust this value as needed.
+
+    return () => clearTimeout(timer); // Cleanup the timeout if the component is unmounted before the timeout finishes
+  }, []);
+
+  const handleSubmit = async () => {
+    if (!uploadedPhoto) return;
+
+    const formData = new FormData();
+    formData.append('photo', uploadedPhoto);
+
+    try {
+        const response = await fetch('http://localhost:5173/upload', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            console.log('Photo uploaded successfully');
+            // Handle the server's response if necessary
+        } else {
+            console.error('Error uploading photo');
+        }
+    } catch (error) {
+        console.error('There was an error uploading the photo', error);
+    }
+  };
+  
+  useEffect(() => {
+    document.title = "Sky Scraping";
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      {isLoading && (
+        <div className="loading-overlay">
+          <div className="curtain left"></div>
+          <div className="curtain right"></div>
+          <div className="ball red"></div>
+          <div className="ball yellow"></div>
+        </div>
+      )}
+
+
+      <div className="nav">
+        Sky Scraping
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div classname="PHOTO">
+        <h1 className="centered-header">Become a constallation!</h1>
+        <div className="upload-section">
+          {uploadedPhoto ? (
+            <img src={uploadedPhoto} alt="Uploaded preview" className="uploaded-preview" />
+            ) : (
+              <label className="upload-label">
+              Drop your photo here or click to select one
+              <input type="file" onChange={handlePhotoUpload} accept=".jpg" style={{ display: 'none' }} />
+            </label>
+          )}
+        </div>
+        <button onClick={handleSubmit}>Submit</button>
+        {returnedPhoto && (
+          <div className="returned-section">
+            <h2>Returned Picture</h2>
+            <img src={returnedPhoto} alt="Returned content" className="returned-preview" />
+          </div>
+        )}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      
+      <div classname="THE PROJECT">
+        <h1>About Our Project</h1>
+      </div>
+      <div classname="ABOUT US">
+        <h1>About us</h1>
+      </div>
+      
     </>
-  )
+  );
 }
 
-export default App
+export default App;
