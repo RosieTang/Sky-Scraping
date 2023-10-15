@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory, render_template
 from flask_cors import CORS
 import base64
 import cv2
@@ -13,24 +13,27 @@ star_path = '/Users/tangyunxi/Library/CloudStorage/OneDrive-Personal/文档/WUST
 app = Flask("Sky Scraper")
 CORS(app)  # This will allow requests from any origin by default. Fine for development, but lock this down in production!
 
-@app.route('/upload', methods=['POST'])
-def upload_image():
-    uploaded_file = request.files.get('photo')
-    if not uploaded_file:
-        return jsonify({"error": "No file uploaded!"}), 400
-    
-    #processed_image_path = # 
-    process_image(uploaded_file)
-    
-    # # Convert the processed image to base64
-    # with open(processed_image_path, "rb") as img_file:
-    #     b64_string = base64.b64encode(img_file.read()).decode()
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        uploaded_file = request.files.get('photo')
+        if not uploaded_file:
+            return jsonify({"error": "No file uploaded!"}), 400
 
-    # # Return the base64 encoded image
-    # return jsonify({'image': b64_string})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        rvr
+        # Process the uploaded file
+        # ...
+        return jsonify({"message": "File uploaded and processed successfully"})
+
+    # Render the HTML page for the GET request
+    return render_template('index.html')                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     rvr
 
 def process_image(human_path):
     run_code(human_path, star_path)
+
+# @app.route('/returns', methods=['GET','POST'])
+# def return_image():
+#     # Send the processed image from the specified directory to the client
+#     return send_from_directory("Users/tangyunxi/Library/CloudStorage/OneDrive-Personal/文档/WUSTL/activities/HackWashu23/skyscraping/photo-upload-server/returns", "pic.jpg", as_attachment=True)
 
 
 if __name__ == '__main__':
@@ -672,4 +675,4 @@ def run_code(human_image_path, star_image_path):
     # plt.imshow(resultant_image)
     plt.axis('off')
     # plt.show()
-    plt.savefig('Users/tangyunxi/Library/CloudStorage/OneDrive-Personal/文档/WUSTL/activities/HackWashu23/skyscraping/photo-upload-server/returns', format='jpg', dpi=1200)
+    plt.savefig('Users/tangyunxi/Library/CloudStorage/OneDrive-Personal/文档/WUSTL/activities/HackWashu23/skyscraping/photo-upload-server/returns/pic.jpg', format='jpg', dpi=1200)

@@ -30,7 +30,7 @@ function App() {
     formData.append('photo', uploadedPhoto);
 
     try {
-        const response = await fetch('http://localhost:5173/upload', {
+        const response = await fetch('http://localhost:5173', {
             method: 'POST',
             body: formData
         });
@@ -73,17 +73,23 @@ function App() {
       </div>
       <div className="photo">
         <h1 className="centered-header">Become a constellation!</h1>
-        <div className="upload-section">
-          {uploadedPhoto ? (
-            <img src={URL.createObjectURL(uploadedPhoto)} alt="Uploaded preview" className="uploaded-preview" />
-            ) : (
-              <label className="upload-label">
-              Drop your photo here or click to select one
-              <input type="file" onChange={handlePhotoUpload} accept=".jpg" style={{ display: 'none' }} />
-            </label>
-          )}
+        <form
+          encType="multipart/form-data"
+          action="http://localhost:5173/upload" // Set the action to your Flask backend URL
+          method="POST" // Use POST method
+          onSubmit={handleSubmit}> // Call handleSubmit when the form is submitted
+          <div className="upload-section">
+            {uploadedPhoto ? (
+              <img src={URL.createObjectURL(uploadedPhoto)} alt="Uploaded preview" className="uploaded-preview" />
+              ) : (
+                <label className="upload-label">
+                Drop your photo here or click to select one
+                <input type="file" onChange={handlePhotoUpload} accept=".jpg" style={{ display: 'none' }} />
+              </label>
+            )}
         </div>
-        <button onClick={handleSubmit}>Submit</button>
+        <button type="submit">Submit</button> {/* Submit button */}
+        </form>
         {returnedPhoto && (
           <div className="returned-section">
             <h2>Returned Picture</h2>
