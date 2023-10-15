@@ -10,7 +10,7 @@ from PIL import Image
 human_path = '/Users/tangyunxi/Library/CloudStorage/OneDrive-Personal/文档/WUSTL/activities/HackWashu23/skyscraping/flask-server/test8.jpg'
 star_path = '/Users/tangyunxi/Library/CloudStorage/OneDrive-Personal/文档/WUSTL/activities/HackWashu23/skyscraping/flask-server/star1.jpg'
 
-app = Flask(__name__)
+app = Flask("Sky Scraper")
 CORS(app)  # This will allow requests from any origin by default. Fine for development, but lock this down in production!
 
 @app.route('/upload', methods=['POST'])
@@ -27,7 +27,7 @@ def upload_image():
     #     b64_string = base64.b64encode(img_file.read()).decode()
 
     # # Return the base64 encoded image
-    # return jsonify({'image': b64_string})
+    # return jsonify({'image': b64_string})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        rvr
 
 def process_image(human_path):
     run_code(human_path, star_path)

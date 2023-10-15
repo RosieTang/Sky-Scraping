@@ -24,30 +24,30 @@ function App() {
   }, []);
 
   const handleSubmit = async () => {
-    // if (!uploadedPhoto) return;
+    if (!uploadedPhoto) return;
 
-    // const formData = new FormData();
-    // formData.append('photo', uploadedPhoto);
+    const formData = new FormData();
+    formData.append('photo', uploadedPhoto);
 
-    // try {
-    //     const response = await fetch('http://localhost:5173/upload', {
-    //         method: 'POST',
-    //         body: formData
-    //     });
+    try {
+        const response = await fetch('http://localhost:5173/upload', {
+            method: 'POST',
+            body: formData
+        });
 
-    //     if (response.ok) {
-    //         const data = await response.json();
+        if (response.ok) {
+            const data = await response.json();
             
-    //         // If using base64 encoding:
-    //         setReturnedPhoto("data:image/jpeg;base64," + data.image);
+            // If using base64 encoding:
+            setReturnedPhoto("data:image/jpeg;base64," + data.image);
             
-    //         console.log('Photo uploaded and processed successfully');
-    //     } else {
-    //         console.error('Error uploading photo');
-    //     }
-    // } catch (error) {
-    //     console.error('There was an error uploading the photo', error);
-    // }
+            console.log('Photo uploaded and processed successfully');
+        } else {
+            console.error('Error uploading photo');
+        }
+    } catch (error) {
+        console.error('There was an error uploading the photo', error);
+    }
   };
 
 
